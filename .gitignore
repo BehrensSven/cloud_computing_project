@@ -1,0 +1,7 @@
+project/.terraform/
+project/*.tfstate
+project/*.tfstate.*
+project/.env
+project/*.tfvars
+
+frontend/node_modules/

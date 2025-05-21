@@ -1,0 +1,4 @@
+ami_id      = "ami-01cd11f529b248fd4"
+key_name = "terraform-ssh-key"
+db_username=  "admin"
+db_password =
