@@ -10,12 +10,16 @@ Das Backend befindet sich in einem separaten Repository und wird beim Erstellen 
 
 ---
 
+## ⚙️ Voraussetzungen
+Terraform muss auf deinem System installiert sein (mind. Version 1.0.0).
+
+
 ## 🚀 Einrichtung
 
 **1. Wechsle in das `project/`-Verzeichnis:**
 
 ```bash
-cd project
+cd ./project
 ```
 **2. Kopiere die `.env.example`-Datei und entferne die  `.example`-Endung:**
 
