@@ -33,7 +33,7 @@ AWS_SECRET_ACCESS_KEY=dein_secret_key
 ```bash
 cp terraform.tfvars.example terraform.tfvars
 ```
-**5. Setze ein sicheres Passwort für die Datenbank in `terraform.tfvars.`**
+**5. Setze ein sicheres Passwort für die Datenbank in `terraform.tfvars`**
 
 **6. Starte die Bereitstellung mit Terraform:**
 
