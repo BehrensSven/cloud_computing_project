@@ -32,6 +32,9 @@ cp .env.example .env
 AWS_ACCESS_KEY_ID=dein_access_key
 AWS_SECRET_ACCESS_KEY=dein_secret_key
 ```
+und lade die AWS-Zugangsdaten in deine Shell-Sitzung
+export $(cat .env | xargs)
+
 **4. Kopiere `terraform.tfvars.example` und entferne `.example`:**
 
 ```bash
@@ -42,5 +45,6 @@ cp terraform.tfvars.example terraform.tfvars
 **6. Starte die Bereitstellung mit Terraform:**
 
 ```bash
+terraform init
 terraform apply
 ```
