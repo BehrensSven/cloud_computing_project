@@ -50,3 +50,15 @@ cp terraform.tfvars.example terraform.tfvars
 terraform init
 terraform apply
 ```
+
+
+**🧪 Test**
+
+Nach erfolgreicher Bereitstellung kannst du folgende Tests durchführen:
+
+Frontend aufrufen:
+https://www.mosaik-modern.com/
+
+Backend-Status testen:
+https://www.mosaik-modern.com/api/status/db/
+
