@@ -32,6 +32,9 @@ resource "aws_db_instance" "django" {
   multi_az                = true                      # Activates automatic replication in second AZ, for the two AZs in the two subnets
   publicly_accessible     = false                     # Do not expose DB to the public internet
   skip_final_snapshot     = true                      # Skip snapshot when deleting (for test environments)
+  backup_retention_period = 7                         # Backup every 7 days
+  backup_window = "03:00-04:00"                       # Backup schedule
+  maintenance_window = "sun:04:00-sun:05:00"          # Maintenance schedule
 
   tags = {
     Name = "django-db"
