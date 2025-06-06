@@ -12,11 +12,11 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  egress {
-    description = "Allow all outbound traffic"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+ egress {
+    description = "Allow HTTPS to external services"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -45,14 +45,21 @@ resource "aws_security_group" "ec2_sg" {
   #   from_port   = 22
   #   to_port     = 22
   #   protocol    = "tcp"
-  #   cidr_blocks = ["3.120.0.0/16"] # AWS EC2 Connect (Frankfurt)
-  # }
+  #   cidr_blocks = ["3.120.0.0/16"] # AWS EC2 Connect (Frankfurt) / or your ip address
 
   egress {
-    description = "Allow all outbound traffic"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "Allow MySQL connection to RDS"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+   security_groups = [aws_security_group.rds_sg.id]
+  }
+
+  egress {
+    description = "Allow HTTPS to external services"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
