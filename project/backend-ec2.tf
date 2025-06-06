@@ -21,8 +21,12 @@ resource "aws_launch_template" "django" {
 
     # Install necessary packages for Python and MySQL client
     sudo apt update -y
+    sudo apt upgrade -y
     sudo apt install -y python3-venv git mysql-client build-essential default-libmysqlclient-dev python3-dev pkg-config
 
+    sudo ufw allow 8000/tcp
+    sudo ufw enable
+    
     # Clone Django backend from GitHub
     cd /home/ubuntu
     git clone https://github.com/BehrensSven/unternehmenswebseite-backend.git
