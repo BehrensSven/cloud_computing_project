@@ -62,3 +62,5 @@ https://www.mosaik-modern.com/
 Backend-Status testen:
 https://www.mosaik-modern.com/api/status/db/
 
+Achtung!: Auch nach erfolgreichem Durchlauf von terraform apply kann es noch einige Minuten dauern, bis mosaik-modern.com korrekt aufgelöst werden kann.
+
