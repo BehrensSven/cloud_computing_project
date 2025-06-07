@@ -46,15 +46,6 @@ resource "aws_security_group" "ec2_sg" {
   #   to_port     = 22
   #   protocol    = "tcp"
   #   cidr_blocks = ["3.120.0.0/16"] # AWS EC2 Connect (Frankfurt) / or your ip address
-
-  egress {
-    description = "Allow MySQL connection to RDS"
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-   security_groups = [aws_security_group.rds_sg.id]
-  }
-
   egress {
     description = "Allow HTTPS to external services"
     from_port   = 443
@@ -74,14 +65,6 @@ resource "aws_security_group" "rds_sg" {
   description = "Allow MySQL access only from EC2 instances"
   vpc_id      = aws_vpc.main.id
 
-  ingress {
-    description     = "Allow MySQL connections from EC2 instances on port 3306"
-    from_port       = 3306
-    to_port         = 3306
-    protocol        = "tcp"
-    security_groups = [aws_security_group.ec2_sg.id] # Only from EC2 SG
-  }
-
   egress {
     description = "Allow all outbound traffic"
     from_port   = 0
@@ -93,4 +76,26 @@ resource "aws_security_group" "rds_sg" {
   tags = {
     Name = "rds-sg"
   }
+}
+
+# Allow EC2 SG to send traffic to RDS SG (egress rule)
+resource "aws_security_group_rule" "ec2_to_rds" {
+  type                     = "egress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.ec2_sg.id
+  source_security_group_id = aws_security_group.rds_sg.id
+  description              = "Allow EC2 to talk to RDS on port 3306"
+}
+
+# Allow RDS SG to receive traffic from EC2 SG (ingress rule)
+resource "aws_security_group_rule" "rds_from_ec2" {
+  type                     = "ingress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.rds_sg.id
+  source_security_group_id = aws_security_group.ec2_sg.id
+  description              = "Allow RDS to accept traffic from EC2 on port 3306"
 }
